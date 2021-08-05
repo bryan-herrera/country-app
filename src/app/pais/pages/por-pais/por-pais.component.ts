@@ -10,16 +10,20 @@ import { Component } from '@angular/core';
 export class PorPaisComponent {
 
   termino: string = '';
+  hayError: boolean = false;
 
   constructor( private PaisService: PaisService) { }
 
   buscar() {
+    this.hayError = false;
     console.log(this.termino);
 
     this.PaisService.buscarPais( this.termino)
-    .subscribe( resp => {
+    .subscribe( (resp) => {
       console.log(resp);
-    })
+    }, (err) => {
+       this.hayError = true;
+    });
 
   }
 
